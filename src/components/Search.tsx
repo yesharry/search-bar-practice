@@ -19,9 +19,6 @@ const Search = ({
   setIndex,
 }: SearchProps) => {
   const keyRef = useRef<HTMLUListElement>(null);
-  const ArrowDown = "ArrowDown";
-  const ArrowUp = "ArrowUp";
-  const Escape = "Escape";
 
   const onChangeInput = (e: React.FormEvent<HTMLInputElement>) => {
     setInput(e.currentTarget.value);
@@ -30,24 +27,20 @@ const Search = ({
   const handleKeyMove = (e: React.KeyboardEvent) => {
     if (!getItems || e.nativeEvent.isComposing) return;
     if (getItems.length > 0) {
-      switch (e.key) {
-        case ArrowDown:
-          setIndex(index + 1);
-          if (keyRef.current?.childElementCount === index + 1) {
-            setIndex(0);
-          }
-          break;
-        case ArrowUp:
-          setIndex(index - 1);
-          if (index <= 0) {
-            setGetItems([]);
-            setIndex(-1);
-          }
-          break;
-        case Escape:
-          setGetItems([]);
-          setIndex(-1);
-          break;
+      if (e.key === "ArrowDown") {
+        setIndex(index + 1);
+        // if (keyRef.current?.childElementCount === index + 1) {
+        //   setIndex(0);
+        // }
+      } else if (e.key === "ArrowUp") {
+        setIndex(index - 1);
+        // if (index <= 0) {
+        //   setGetItems([]);
+        //   setIndex(-1);
+        // }
+      } else if (e.key === "Escape") {
+        setGetItems([]);
+        setIndex(-1);
       }
     }
   };

@@ -57,7 +57,7 @@ function App() {
           index={index}
           setIndex={setIndex}
         />
-        {getItems.length > 0 && input && (
+        {getItems.length >= 0 && input && (
           <AutoSearch setInput={setInput} getItems={getItems} index={index} />
         )}
       </div>

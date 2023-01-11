@@ -16,20 +16,24 @@ const AutoSearch = ({ setInput, getItems, index }: AutoProps) => {
 
   return (
     <div className=" w-96 h-80 bg-white mt-2 p-2 overflow-scroll">
-      <ul>
-        <p className=" text-xs text-gray-400">추천 검색어</p>
-        {getItems.map((search, idx) => (
-          <Li
-            key={search.sickCd}
-            onClick={() => {
-              setInput(search.sickNm), handleAutoClick(search.sickNm);
-            }}
-            isFocus={index === idx ? true : false}
-          >
-            <p className=" truncate overflow-hidden">{search.sickNm}</p>
-          </Li>
-        ))}
-      </ul>
+      {getItems.length === 0 ? (
+        <p>추천 검색어 없음</p>
+      ) : (
+        <ul>
+          <p className=" text-xs text-gray-400">추천 검색어</p>
+          {getItems.map((search, idx) => (
+            <Li
+              key={search.sickCd}
+              onClick={() => {
+                setInput(search.sickNm), handleAutoClick(search.sickNm);
+              }}
+              isFocus={index === idx ? true : false}
+            >
+              <p className=" truncate overflow-hidden">{search.sickNm}</p>
+            </Li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
