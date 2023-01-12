@@ -17,7 +17,7 @@ const AutoSearch = ({ setInput, getItems, index }: AutoProps) => {
   return (
     <div className=" w-96 h-80 bg-white mt-2 p-2 overflow-scroll">
       {getItems.length === 0 ? (
-        <p>추천 검색어 없음</p>
+        <p className=" text-gray-500">추천 검색가 없습니다.</p>
       ) : (
         <ul>
           <p className=" text-xs text-gray-400">추천 검색어</p>
