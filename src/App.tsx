@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import AutoSearch from "./components/AutoSearch";
 import Search from "./components/Search";
@@ -9,7 +10,7 @@ export interface SickProps {
 
 interface DataProps {
   includes(data: string): boolean;
-  sickNm?: any;
+  sickNm: string;
 }
 
 function App() {
@@ -17,16 +18,10 @@ function App() {
   const [getItems, setGetItems] = useState<SickProps[]>([]);
   const [index, setIndex] = useState<number>(-1);
 
-  const getData = () => {
-    return fetch(`http://localhost:4000/sick`)
-      .then((res) => res.json())
-      .then((data) => data);
-  };
-
-  const updateData = async () => {
-    const res = await getData();
-    let key = res.filter(
-      (list: DataProps) => list.sickNm.includes(input) === true
+  const getData = async () => {
+    const res = await axios.get(`http://localhost:4000/sick`);
+    let key = res.data.filter(
+      (list: DataProps) => list.sickNm?.includes(input) === true
     );
     setGetItems(key);
   };
@@ -34,7 +29,7 @@ function App() {
   useEffect(() => {
     const debounce = setTimeout(() => {
       if (input) {
-        updateData();
+        getData();
       }
       console.log("calling api");
     }, 200);
